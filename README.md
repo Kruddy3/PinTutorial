@@ -2,18 +2,22 @@
 This guide is set up in a way to help beginners successfully build pin tools and run them on a windows machine. The first section will be installing and setup. 
 We will use Visual Studios 2015 to build the tools and Cygwin to actually run the tool.
 ##Part 1
+
 ###Installing Pin
+
 Download link: https://software.intel.com/en-us/articles/pin-a-binary-instrumentation-tool-downloads
 Docs for more information: https://software.intel.com/sites/landingpage/pintool/docs/97619/Pin/html/index.html
 extract and rename the folder to pin
 move pin folder to C:/
 ###Installing VS2015
+
 Install Visual Studio 2015 (2017 can work for 3.10 according to docs)
 Join Microsoft dev essentials so that you can get an older version of MSVS https://my.visualstudio.com/subscriptions
  
 Then you can download it from here (be careful of x64 vs x86) https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203
 Make sure to install the c/c++ workspaces 
 ###Building The Tools
+
 Open C:\pin\source\tools\MyPinTool\MyPinTool.vcxproj in Visual Studio 
  
 expand the Source Files section.
@@ -37,6 +41,7 @@ Set Configuration Properties -> Linker -> Advanced -> Image Has Safe Exception H
  
 You should be able to build the tools now with no errors (Ctrl+Shift+B or right click MyPinTool->Build)
 ###Transferring built tool to the School Computer
+
 Connect to the school vpn (anyc.vpn.gatech.edu) using Cisco AnyConnect Mobility Client
 Download WINSCP to transfer your built tool
 WINSCP to the prism server 
@@ -46,6 +51,7 @@ Navigate to:
 /nethome/{YOUR_USERNAME}/ECE/Desktop
 Upload the zipped folder of MyPinTools (C:\pin\source\tools\MyPinTool)
 ###Transferring Built tool to Malware VM
+
 To connect to the computer surrounding the VM you need to use xfreerdp 
 The command will look something like:
 xfreerdp /u:GTUSERNAME /d:AD /v:ece-4894-01.ece.gatech.edu 
@@ -62,7 +68,7 @@ It should be on the vm now
 Unpack it and place it in the same place on pin (C:\pin\source\tools\MyPinTool on the vm)
 Open Cygwin on desktop 
 	Navigate to c:/pin
-	cd /cygdrive/c/pin
+	cd /cygdrive/c/pin
 
 Use this command to test if it works
 c:/pin> ./pin.exe -t ./source/tools/MyPinTool/Release/MyPinTool.dll -- ./../Windows/System32/calc.exe
@@ -76,7 +82,9 @@ Transfer the files out using this as reference:
 
 
 ##Part 2
+
 ###Making the pin tool
+
 First a warning. The program I will be working on is malware which is likely what people using this tutorial will also be working on. I have fully reverse engineered the program I will be working with, so I am confident that there will be no negative effects for the pin tool I will be writing.
 The main command we will be relying on is:
 PIN_AddSyscallEntryFunction
