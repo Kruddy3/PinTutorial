@@ -72,42 +72,52 @@ Navigate to:
 ```
 Upload the zipped folder of MyPinTools (C:\pin\source\tools\MyPinTool)
 
-### Transferring Built tool to Malware VM
-To connect to the computer surrounding the VM you need to use xfreerdp 
-The command will look something like:
+### Transferring Built tool to Malware VM using RDP
+- To connect to the computer surrounding the VM you need to use xfreerdp 
+- The command will look something like:
 ```
-xfreerdp /u:GTUSERNAME /d:AD /v:ece-4894-01.ece.gatech.edu 
+	xfreerdp /u:GTUSERNAME /d:AD /v:ece-4894-01.ece.gatech.edu 
 ```
-if you are getting a certificate warning you may need to add /cert-ignore
-if you would like to change the dimensions add /w:1800 /h:900
-At this point the tool should have been built on your computer then compressed and transferred to the schools servers. We will now transfer the tool using a the COM1 port.
-Move the file from where you uploaded it on the desktop to C:\vm_setup_bds
+	- If you are getting a certificate warning you may need to add /cert-ignore
+	- If you would like to change the dimensions add /w:1800 /h:900
+
+#### Transferting using shared folders
+
+- If you are transfering files between the malware VM and the surrounding VM using shared folders it is very easy. You can actually share the folder where that you are building your pin tool in to make it easy.
+
+#### Transfering using COM ports
+
+- At this point the tool should have been built on your computer then compressed and transferred to the schools servers. We will now transfer the tool using a the COM1 port.
+- Move the file from where you uploaded it on the desktop to C:\vm_setup_bds
 ![Image](img/10.png)
-Open PowerShell on the 4894 computer you have connected to:
-	Use instruction (make sure the malware VM is open): 
-	Copy-vmfile ece-4894-vm c:\ -SourcePath C:\vm_setup_bds\FILE -createfullpath -filesource Host
-![Image](img/11.png)
-It should be on the vm now
-Unpack it and place it in the same place on pin (C:\pin\source\tools\MyPinTool on the vm)
-Open Cygwin on desktop 
+- Open PowerShell on the 4894 computer you have connected to:
+- Use instruction (make sure the malware VM is open): 
 ```
-	Navigate to c:/pin
+	Copy-vmfile ece-4894-vm c:\ -SourcePath C:\vm_setup_bds\FILE -createfullpath -filesource Host
+```
+![Image](img/11.png)
+- Unpack it and place it in the same place on pin (C:\pin\source\tools\MyPinTool on the vm)
+- Open Cygwin on desktop 
+- Navigate to c:/pin
+
+```
 	cd /cygdrive/c/pin
 ```
 
-Use this command to test if it works
+- Use this command to test if it works
+
 ```
 c:/pin> ./pin.exe -t ./source/tools/MyPinTool/Release/MyPinTool.dll -- ./../Windows/System32/calc.exe
 	this command has 3 parts
 	PINEXE -t THE_TOOL_DLL_BEING_USED -- THE_PROGRAM_BEING_TESTED
 ```
-output file should be in c:/pin and the console should also output the result
+- output file should be in c:/pin and the console should also output the result
 
 ![Image](img/12.png)
 
-Transfer the files out using this as reference:
+- Transfer the files out using this as reference:
 	[Link](https://charbelnemnom.com/2016/04/how-to-copy-files-between-the-guest-and-the-host-in-hyperv-with-powershell-direct/)
-
+	- The problem with transfering files out using com ports is that it requires permissions to do so
 
 ## Part 2
 ### Making the pin tool
