@@ -116,7 +116,6 @@ c:/pin> ./pin.exe -t ./source/tools/MyPinTool/Release/MyPinTool.dll -- ./../Wind
 ![Image](img/12.png)
 
 Transfer the files out using this as reference:
-
 	[Link](https://charbelnemnom.com/2016/04/how-to-copy-files-between-the-guest-and-the-host-in-hyperv-with-powershell-direct/)
 	- The problem with transfering files out using com ports is that it requires permissions to do so
 
