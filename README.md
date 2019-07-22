@@ -153,7 +153,9 @@ This tool walks through a program and shows the inputs when malloc is called and
 //This is where we will be storing the output of our tool
 std::ofstream TraceFile; 
 
-/* Knobs automate the parsing and management of command line switches. A command line contains switches for Pin, the tool, and the application. The knobs parsing code understands how to separate them. */
+/* Knobs automate the parsing and management of command line switches. A command line 
+contains switches for Pin, the tool, and the application. The knobs parsing code 
+understands how to separate them. */
 KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool",
     "o", "malloctrace.out", "specify trace file name");
 /* ===================================================================== */
@@ -181,28 +183,29 @@ VOID Image(IMG img, VOID *v)
     //we search through the img for a routine named malloc or _malloc
     RTN mallocRtn = RTN_FindByName(img, MALLOC);
 
-//if we found a routine in the image with that name continue
+    //if we found a routine in the image with that name continue
     if (RTN_Valid(mallocRtn))
     {
         RTN_Open(mallocRtn);
 
-        //we are inserting our own call to our own functions here but lets break it down more
+        //we are inserting our own call to our own functions here but lets break it 
+	//down more
         RTN_InsertCall(
-//the RTN that is getting passed to the analysis routine 
+	//the RTN that is getting passed to the analysis routine 
 	mallocRtn, 
-//we are inserting our call BEFORE the routine is ran
-IPOINT_BEFORE, 
-//Arg1Before is the function we will be running when this gets triggered
-(AFUNPTR)Arg1Before,
-//IARG_ADDRINT is the datatype we are passing in to Arg1Before
-IARG_ADDRINT, 
-//Malloc is the value being passed to the function
-MALLOC,
-//We are grabbing the 1st (0 position) of the function parameters we found and passing it to Arg1Before
-//for malloc it has 1 parameter which is size
-IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
-//all argument lists must end with this
-IARG_END);
+	//we are inserting our call BEFORE the routine is ran
+	IPOINT_BEFORE, 
+	//Arg1Before is the function we will be running when this gets triggered
+	(AFUNPTR)Arg1Before,
+	//IARG_ADDRINT is the datatype we are passing in to Arg1Before
+	IARG_ADDRINT, 
+	//Malloc is the value being passed to the function
+	MALLOC,
+	//We are grabbing the 1st (0 position) of the function parameters we found 
+	//and passing it to Arg1Before for malloc it has 1 parameter which is size
+	IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
+	//all argument lists must end with this
+	IARG_END);
 
         RTN_InsertCall(
 mallocRtn, 
@@ -253,9 +256,13 @@ INT32 Usage()
 
 int main(int argc, char *argv[])
 {
-/*Initialize symbol table code. Pin does not read symbols unless this is called.Must call before PIN_StartProgram
+/*Initialize symbol table code. Pin does not read symbols unless this is called.
+Must call before PIN_StartProgram
 
-Symbol Table is an important data structure created and maintained by the compiler in order to keep track of semantics of variable i.e. it stores information about scope and binding information about names, information about instances of various entities such as variable and function names, classes, objects, etc. */
+Symbol Table is an important data structure created and maintained by the compiler 
+in order to keep track of semantics of variable i.e. it stores information about 
+scope and binding information about names, information about instances of various 
+entities such as variable and function names, classes, objects, etc. */
     PIN_InitSymbols();
     if( PIN_Init(argc,argv) )
     {
@@ -268,10 +275,10 @@ Symbol Table is an important data structure created and maintained by the compil
     TraceFile.setf(ios::showbase);
     
     // Use this to register a call back to catch the loading of an image.
-//This is IMG_AddInstrumentFunction meaning an image is passed to our instrumentation function
+    //This is IMG_AddInstrumentFunction meaning an image is passed to our instrumentation function
 	//Image is the function that will be called when this gets triggered
     IMG_AddInstrumentFunction(Image, 0);
-//when the program finishes Fini will be called
+    //when the program finishes Fini will be called
     PIN_AddFiniFunction(Fini, 0);
 
     // Never returns
