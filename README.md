@@ -16,6 +16,7 @@ Join Microsoft dev essentials so that you can get an older version of MSVS https
  
 Then you can download it from here (be careful of x64 vs x86) https://my.visualstudio.com/Downloads?q=Visual%20Studio%202015%20with%20Update%203
 Make sure to install the c/c++ workspaces 
+
 ###Building The Tools
 
 Open C:\pin\source\tools\MyPinTool\MyPinTool.vcxproj in Visual Studio 
@@ -40,6 +41,7 @@ Set Configuration Properties -> Linker -> Advanced -> Image Has Safe Exception H
 	No (/SAFESEH:NO)
  
 You should be able to build the tools now with no errors (Ctrl+Shift+B or right click MyPinTool->Build)
+
 ###Transferring built tool to the School Computer
 
 Connect to the school vpn (anyc.vpn.gatech.edu) using Cisco AnyConnect Mobility Client
@@ -50,6 +52,7 @@ Hostname: scp.prism.gatech.edu
 Navigate to: 
 /nethome/{YOUR_USERNAME}/ECE/Desktop
 Upload the zipped folder of MyPinTools (C:\pin\source\tools\MyPinTool)
+
 ###Transferring Built tool to Malware VM
 
 To connect to the computer surrounding the VM you need to use xfreerdp 
