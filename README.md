@@ -137,7 +137,7 @@ The analysis routine defines what to do when the instrumentation is activated. T
 I will be walking through the example program malloctrace which can be found at pin/source/tools/ManualExamples/malloctrace.cpp
 ### Breaking down malloctrace
 This tool walks through a program and shows the inputs when malloc is called and what it returns.
-``` malloctrace.cpp
+```cpp
 #include "pin.H"
 #include <iostream>
 #include <fstream>
