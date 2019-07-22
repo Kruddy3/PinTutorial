@@ -274,7 +274,7 @@ entities such as variable and function names, classes, objects, etc. */ **
     TraceFile << hex;
     TraceFile.setf(ios::showbase);
     
-    **// Use this to register a call back to catch the loading of an image.**
+    __// Use this to register a call back to catch the loading of an image.__
     **//This is IMG_AddInstrumentFunction meaning an image is passed to our instrumentation function**
 	**//Image is the function that will be called when this gets triggered**
     IMG_AddInstrumentFunction(Image, 0);
