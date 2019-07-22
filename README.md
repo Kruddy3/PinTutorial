@@ -256,13 +256,13 @@ INT32 Usage()
 
 int main(int argc, char *argv[])
 {
-**/*Initialize symbol table code. Pin does not read symbols unless this is called.
+** /*Initialize symbol table code. Pin does not read symbols unless this is called.
 Must call before PIN_StartProgram
 
 Symbol Table is an important data structure created and maintained by the compiler 
 in order to keep track of semantics of variable i.e. it stores information about 
 scope and binding information about names, information about instances of various 
-entities such as variable and function names, classes, objects, etc. */**
+entities such as variable and function names, classes, objects, etc. */ **
     PIN_InitSymbols();
     if( PIN_Init(argc,argv) )
     {
