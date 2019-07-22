@@ -48,13 +48,17 @@ WINSCP to the prism server
 Hostname: scp.prism.gatech.edu
 	 
 Navigate to: 
-/nethome/{YOUR_USERNAME}/ECE/Desktop
+```
+	/nethome/{YOUR_USERNAME}/ECE/Desktop
+```
 Upload the zipped folder of MyPinTools (C:\pin\source\tools\MyPinTool)
 
 ### Transferring Built tool to Malware VM
 To connect to the computer surrounding the VM you need to use xfreerdp 
 The command will look something like:
+```
 xfreerdp /u:GTUSERNAME /d:AD /v:ece-4894-01.ece.gatech.edu 
+```
 if you are getting a certificate warning you may need to add /cert-ignore
 if you would like to change the dimensions add /w:1800 /h:900
 At this point the tool should have been built on your computer then compressed and transferred to the schools servers. We will now transfer the tool using a the COM1 port.
@@ -67,13 +71,17 @@ Open PowerShell on the 4894 computer you have connected to:
 It should be on the vm now
 Unpack it and place it in the same place on pin (C:\pin\source\tools\MyPinTool on the vm)
 Open Cygwin on desktop 
+```
 	Navigate to c:/pin
 	cd /cygdrive/c/pin
+```
 
 Use this command to test if it works
+```
 c:/pin> ./pin.exe -t ./source/tools/MyPinTool/Release/MyPinTool.dll -- ./../Windows/System32/calc.exe
 	this command has 3 parts
 	PINEXE -t THE_TOOL_DLL_BEING_USED -- THE_PROGRAM_BEING_TESTED
+```
 output file should be in c:/pin and the console should also output the result
  
 
