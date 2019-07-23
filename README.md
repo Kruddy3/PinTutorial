@@ -127,11 +127,13 @@ I will be finishing up the pin tool I am working on next week when my professor 
 Take some time to read over the API references [here](https://software.intel.com/sites/landingpage/pintool/docs/97971/Pin/html/group__API__REF.html) to be familiar with the terms that will be used.
 
 ### Learning the basics
-A pin tool has 2 major sections: 
+A pin tool has 2 major sections:
+
 	- Instrumentation routine
 	- Analysis routine
 
 The instrumentation routine gets called with every instruction and it is where we decide what to do with the instruction given. This routine can place our own functions where we want in the program we are analyzing. 
+
 The analysis routine defines what to do when the instrumentation is activated. This is typically where the actual goal of our tool is completed.
 
 I will be walking through the example program malloctrace which can be found at pin/source/tools/ManualExamples/malloctrace.cpp
